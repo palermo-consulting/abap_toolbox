@@ -11,7 +11,8 @@ public section.
   methods ADD_COLUMN
     importing
       value(IM_FIELDNAME) type SLIS_FIELDNAME
-      value(IM_SELTEXT_M) type DD03P-SCRTEXT_M .
+      value(IM_SELTEXT_M) type DD03P-SCRTEXT_M optional
+      value(IM_SELTEXT_L) type DD03P-SCRTEXT_L optional.
   methods DISPLAY
     changing
       !IM_ALVDATA type TABLE .
@@ -38,8 +39,13 @@ CLASS ZCL_ALV_SIMPLE IMPLEMENTATION.
 METHOD add_column.
 
   s_fieldcat-fieldname = im_fieldname.
-  s_fieldcat-seltext_m = im_seltext_m.
-  s_fieldcat-seltext_l = im_seltext_l.
+  IF im_seltext_m IS INITIAL AND im_seltext_l IS INITIAL.
+	s_fieldcat-seltext_m = 'Column'.
+	s_fieldcat-seltext_l = 'Column'.
+  ELSE.
+    s_fieldcat-seltext_m = im_seltext_m.
+    s_fieldcat-seltext_l = im_seltext_l.
+  ENDIF.
   APPEND s_fieldcat TO t_fieldcat.
 
 ENDMETHOD.
