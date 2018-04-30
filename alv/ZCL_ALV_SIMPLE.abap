@@ -39,6 +39,7 @@ METHOD add_column.
 
   s_fieldcat-fieldname = im_fieldname.
   s_fieldcat-seltext_m = im_seltext_m.
+  s_fieldcat-seltext_l = im_seltext_l.
   APPEND s_fieldcat TO t_fieldcat.
 
 ENDMETHOD.
